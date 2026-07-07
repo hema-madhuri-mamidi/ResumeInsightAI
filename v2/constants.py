@@ -1,0 +1,78 @@
+"""Section-heading constants for the Version 2 resume parser."""
+
+from __future__ import annotations
+
+SECTION_HEADINGS: dict[str, tuple[str, ...]] = {
+    "summary": (
+        "summary",
+        "professional summary",
+        "career summary",
+        "profile summary",
+        "resume summary",
+    ),
+    "objective": (
+        "objective",
+        "career objective",
+        "professional objective",
+        "career goal",
+    ),
+    "education": (
+        "education",
+        "academic background",
+        "academic qualifications",
+        "educational qualification",
+        "educational qualifications",
+        "qualification",
+    ),
+    "projects": (
+        "projects",
+        "academic projects",
+        "personal projects",
+        "major projects",
+        "relevant projects",
+        "key projects",
+        "project experience",
+    ),
+    "experience": (
+        "experience",
+        "work experience",
+        "professional experience",
+        "employment history",
+        "internships",
+        "internship experience",
+        "career experience",
+    ),
+    "skills": (
+        "skills",
+        "technical skills",
+        "professional skills",
+        "core skills",
+        "key skills",
+        "programming skills",
+        "skills & tools",
+    ),
+    "certifications": (
+        "certifications",
+        "certificates",
+        "licenses",
+        "courses",
+        "training",
+        "professional certifications",
+    ),
+    "activities": (
+        "activities",
+        "activity",
+        "activities & competitions",
+        "activities and competitions",
+        "achievements",
+        "achievements & activities",
+        "leadership",
+        "leadership experience",
+        "extracurricular",
+        "extracurricular activities",
+        "positions of responsibility",
+        "extra-curricular activities",
+        "volunteer",
+        "volunteering",
+    ),
+}
