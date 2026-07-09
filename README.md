@@ -27,7 +27,7 @@ Current limitations:
 
 🔗 LinkedIn: https://www.linkedin.com/posts/hema-madhuri-mamidi_python-flask-fullstackdevelopment-ugcPost-7481005467637493760-RXI6/
 
-🔗 GitHub: https://github.com/hema-madhuri-mamidi/ResumeInsightAI
+GitHub: https://github.com/hema-madhuri-mamidi/ResumeInsightAI
 ---
 
 # 👩‍💻 Author
