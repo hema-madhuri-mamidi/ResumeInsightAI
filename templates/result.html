@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Result{% endblock %}
+
+{% block content %}
+<div class="results-page">
+    <div class="results-header">
+        <div class="results-eyebrow">Resume Insights</div>
+        <h1>Resume Analysis</h1>
+        <p>Your parsed resume information is shown below.</p>
+    </div>
+    <div class="results-shell">
+        <div id="results-container" class="results-grid" aria-live="polite"></div>
+    </div>
+</div>
+{% endblock %}

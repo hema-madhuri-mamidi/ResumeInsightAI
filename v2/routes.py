@@ -7,7 +7,11 @@ from typing import Any
 
 from flask import Blueprint, current_app, jsonify, request
 
+from .ats_score import calculate_ats_score
+from .job_match import calculate_job_match
 from .parser import parse_resume as parse_resume_v2
+from .skill_gap import analyze_skill_gap
+from .suggestions import generate_suggestions
 
 bp = Blueprint("main", __name__, url_prefix="/api")
 
@@ -55,4 +59,16 @@ def parse_resume() -> Any:
         if temp_path.exists():
             temp_path.unlink()
 
+    job_description = request.form.get("job_description", "").strip()
+    ats_score = calculate_ats_score(data)
+    suggestions = generate_suggestions(data)
+    job_match = calculate_job_match(data, job_description)
+    skill_gap = analyze_skill_gap(data, job_description)
+    data["ats_score"] = ats_score
+    data["suggestions"] = suggestions
+    data["job_match"] = job_match
+    data["skill_gap"] = skill_gap
+
     return jsonify({"success": True, "data": data})
+# text=extract_pdf_text(temp_path)
+# print(text)

@@ -26,7 +26,7 @@ BRANCH_PATTERN = re.compile(
 
 COLLEGE_PATTERN = re.compile(
     r"\b(?:"
-    r"Vignan's Institute of Information Technology|Vignan' s Institute of Information Technology|"
+    r"Vignan['’]s Institute of Information Technology|Vignan['’] s Institute of Information Technology|"
     r"IIT Madras|NIT Warangal|Anna University|University of Hyderabad|"
     r"Institute of Technology|University|College|Engineering College"
     r")\b",
@@ -53,13 +53,13 @@ def _is_ignored_line(line: str) -> bool:
     if not lowered:
         return True
 
-    if "cgpa" in lowered or "gpa" in lowered:
-        return True
     if "percentage" in lowered or "%" in lowered:
         return True
     if re.fullmatch(r"\d{4}", lowered):
         return True
     if re.fullmatch(r"\d{4}\s*[-–]\s*\d{4}", lowered):
+        return True
+    if re.fullmatch(r"(?:cgpa|gpa)\s*[:=]?\s*\d+(?:\.\d+)?(?:\s*/\s*10)?", lowered):
         return True
 
     return False
@@ -86,16 +86,24 @@ def extract_branch(lines: list[str]) -> str | None:
 def extract_college(lines: list[str]) -> str | None:
     """Return the most likely college or university name from the education section."""
     for line in _clean_lines(lines):
-        if _is_ignored_line(line):
-            continue
-        if DEGREE_PATTERN.search(line):
-            continue
-        if BRANCH_PATTERN.search(line):
+        cleaned_line = line
+        cleaned_line = re.sub(
+            r"\s*(?:cgpa|gpa)\s*[:=]?\s*\d+(?:\.\d+)?(?:\s*/\s*10)?$",
+            "",
+            cleaned_line,
+            flags=re.IGNORECASE,
+        ).strip()
+        cleaned_line = re.sub(r"\s*\([^)]*\)\s*$", "", cleaned_line).strip()
+        if _is_ignored_line(cleaned_line):
             continue
 
-        match = COLLEGE_PATTERN.search(line)
+        match = COLLEGE_PATTERN.search(cleaned_line)
         if match:
             return match.group(0).strip()
+        if DEGREE_PATTERN.search(cleaned_line):
+            continue
+        if BRANCH_PATTERN.search(cleaned_line):
+            continue
 
     return None
 

@@ -1,6 +1,7 @@
 import unittest
 
 from v2.certification_parser import extract_certifications
+from v2.education_parser import extract_education
 from v2.experience_parser import extract_experience
 from v2.project_parser import extract_projects
 from v2.section_detector import detect_sections
@@ -76,6 +77,19 @@ class V2ParserTests(unittest.TestCase):
         self.assertEqual(projects[0]["title"], "Niyo Voice Job Portal")
         self.assertEqual(projects[0]["technologies"], ["React", "Django", "Web Speech API"])
 
+    def test_extract_projects_recognizes_titles_with_metadata_tokens(self) -> None:
+        section_lines = [
+            "Nail Health AI - DTI Project | Team Lead Live Demo | GitHub",
+            "Python, Django, TensorFlow, EfficientNetB0",
+            "• Built a healthcare web app",
+        ]
+
+        projects = extract_projects(section_lines)
+
+        self.assertEqual(len(projects), 1)
+        self.assertEqual(projects[0]["title"], "Nail Health AI - DTI Project")
+        self.assertEqual(projects[0]["technologies"], ["Python", "Django", "TensorFlow", "EfficientNetB0"])
+
     def test_extract_projects_strips_link_metadata_from_titles(self) -> None:
         section_lines = [
             "Wallet Watch — Expense Tracker (Deployed) Live Demo | GitHub",
@@ -136,6 +150,47 @@ class V2ParserTests(unittest.TestCase):
         self.assertEqual(len(projects), 2)
         self.assertEqual(projects[0]["title"], "AI Career Portal Web Application")
         self.assertEqual(projects[1]["title"], "Student Management System")
+
+    def test_extract_education_extracts_college_when_cgpa_is_present(self) -> None:
+        lines = [
+            "B.Tech in Artificial Intelligence and Data Science",
+            "Vignan's Institute of Information Technology, Andhra Pradesh, India CGPA: 9.63 / 10",
+            "2024 - 2028",
+        ]
+
+        education = extract_education(lines)
+
+        self.assertEqual(education["degree"], "B.Tech")
+        self.assertEqual(education["branch"], "Artificial Intelligence and Data Science")
+        self.assertEqual(education["college"], "Vignan's Institute of Information Technology")
+        self.assertEqual(education["cgpa"], "9.63")
+        self.assertEqual(education["graduation_year"], "2028")
+
+    def test_extract_education_extracts_college_from_parenthetical_alias_line(self) -> None:
+        lines = [
+            "B.Tech in Artificial Intelligence and Data Science",
+            "Vignan's Institute of Information Technology (Vignan's IIT), Andhra Pradesh, India CGPA: 9.63 / 10",
+            "2024 - 2028",
+        ]
+
+        education = extract_education(lines)
+
+        self.assertEqual(education["college"], "Vignan's Institute of Information Technology")
+        self.assertEqual(education["cgpa"], "9.63")
+        self.assertEqual(education["graduation_year"], "2028")
+
+    def test_extract_education_extracts_college_when_curly_apostrophe_is_used(self) -> None:
+        lines = [
+            "B.Tech in Artificial Intelligence and Data Science",
+            "Vignan’s Institute of Information Technology (Vignan’s IIT), Andhra Pradesh, India CGPA: 9.63 / 10",
+            "2024 - 2028",
+        ]
+
+        education = extract_education(lines)
+
+        self.assertEqual(education["college"], "Vignan’s Institute of Information Technology")
+        self.assertEqual(education["cgpa"], "9.63")
+        self.assertEqual(education["graduation_year"], "2028")
 
     def test_extract_projects_keeps_first_project_when_title_has_parenthetical_technologies(self) -> None:
         section_lines = [

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Insight AI{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Resume Insight AI</h1>
+    <p class="subtitle">Upload your resume and instantly extract structured information using AI-powered parsing.</p>
+    {% if error %}
+    <p class="error-message">{{ error }}</p>
+    {% endif %}
+    <form id="upload-form" class="upload-card" method="POST" action="{{ url_for('index') }}" enctype="multipart/form-data">
+        <div class="upload-icon">📄</div>
+        <h2>Upload Resume</h2>
+        <p>Drag &amp; Drop your PDF here<br>or click below to browse.</p>
+        <input id="resume" class="file-input" type="file" name="resume" accept=".pdf" aria-label="Upload PDF resume">
+        <label for="job-description" class="job-description-label">Optional job description</label>
+        <textarea id="job-description" class="job-description-input" name="job_description" rows="4" placeholder="Paste a job description to compare your resume against..."></textarea>
+        <button class="upload-button" type="submit">Analyze Resume</button>
+        <div id="error-message"></div>
+        <div id="loading" style="display:none;">Analyzing...</div>
+    </form>
+</div>
+{% endblock %}

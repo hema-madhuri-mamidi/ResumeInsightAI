@@ -31,6 +31,10 @@ _LINK_METADATA_TOKENS: Final[tuple[str, ...]] = (
     "vercel",
     "netlify",
     "railway",
+    "team lead",
+    "deployed",
+    "ongoing",
+    "demo",
 )
 COMMON_TECHNOLOGIES: Final[frozenset[str]] = frozenset(
     {
@@ -171,11 +175,16 @@ def _strip_classification_metadata(line: str) -> str:
     if not cleaned:
         return ""
 
+    if "|" in cleaned:
+        parts = [part.strip() for part in re.split(r"\|", cleaned) if part.strip()]
+        if len(parts) > 1:
+            cleaned = parts[0]
+
     for token in _LINK_METADATA_TOKENS:
         if token in cleaned.lower():
-            cleaned = re.sub(rf"\b{re.escape(token)}\b", "", cleaned, flags=re.IGNORECASE).strip()
+            cleaned = re.sub(rf"(?<!\w){re.escape(token)}(?!\w)", "", cleaned, flags=re.IGNORECASE).strip()
 
-    cleaned = re.sub(r"\s*\((?:deployed|live demo|demo)\s*\)", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s*\((?:deployed|live demo|demo|ongoing)\s*\)", "", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"\s*\[(.*?)\]", "", cleaned)
     cleaned = re.sub(r"\s+", " ", cleaned).strip(" -–—")
     return cleaned
@@ -239,6 +248,8 @@ def _strip_link_metadata(title: str) -> str:
         parenthetical = suffix.rsplit(")", 1)[0]
         if prefix.strip() and _looks_like_technology_heavy_line(parenthetical):
             cleaned = prefix.strip()
+        elif prefix.strip() and parenthetical.lower() in {"deployed", "live demo", "demo", "ongoing"}:
+            cleaned = prefix.strip()
 
     for token in _LINK_METADATA_TOKENS:
         if token in cleaned.lower():
@@ -281,6 +292,12 @@ def looks_like_project_title(line: str) -> bool:
         if len(tokens) >= 2 and sum(1 for token in tokens if token.lower() in COMMON_TECHNOLOGIES) >= 2:
             return False
 
+    candidate = _strip_classification_metadata(cleaned)
+    if candidate and len(candidate.split()) > 12:
+        return False
+    if len(cleaned.split()) > 12 and not candidate:
+        return False
+
     if _URL_PATTERN.search(cleaned):
         return False
 
@@ -299,7 +316,7 @@ def looks_like_project_title(line: str) -> bool:
     if _contains_multiple_sentences(cleaned):
         return False
 
-    if len(cleaned.split()) > 12:
+    if candidate and re.fullmatch(r"[A-Za-z0-9.+/#-]+", candidate):
         return False
 
     return True
