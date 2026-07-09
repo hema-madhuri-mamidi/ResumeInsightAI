@@ -3,22 +3,113 @@
 {% block title %}Resume Insight AI{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <h1>Resume Insight AI</h1>
-    <p class="subtitle">Upload your resume and instantly extract structured information using AI-powered parsing.</p>
-    {% if error %}
-    <p class="error-message">{{ error }}</p>
-    {% endif %}
-    <form id="upload-form" class="upload-card" method="POST" action="{{ url_for('index') }}" enctype="multipart/form-data">
-        <div class="upload-icon">📄</div>
-        <h2>Upload Resume</h2>
-        <p>Drag &amp; Drop your PDF here<br>or click below to browse.</p>
-        <input id="resume" class="file-input" type="file" name="resume" accept=".pdf" aria-label="Upload PDF resume">
-        <label for="job-description" class="job-description-label">Optional job description</label>
-        <textarea id="job-description" class="job-description-input" name="job_description" rows="4" placeholder="Paste a job description to compare your resume against..."></textarea>
-        <button class="upload-button" type="submit">Analyze Resume</button>
-        <div id="error-message"></div>
-        <div id="loading" style="display:none;">Analyzing...</div>
-    </form>
+<div class="hero-shell">
+    <section class="hero-intro">
+        <div class="hero-badge">AI-powered Resume Intelligence</div>
+        <h1>ResumeInsightAI</h1>
+        <p class="subtitle">Analyze your resume, evaluate ATS readiness, compare with job descriptions, identify missing skills, and receive personalized improvement suggestions.</p>
+        <div class="hero-badges" aria-label="Platform highlights">
+            <span>✓ ATS Analysis</span>
+            <span>✓ Job Match</span>
+            <span>✓ Skill Gap Analysis</span>
+            <span>✓ Resume Insights</span>
+        </div>
+    </section>
+
+    <section class="hero-grid">
+        <form id="upload-form" class="upload-card" method="POST" action="{{ url_for('index') }}" enctype="multipart/form-data">
+            <div class="upload-icon" aria-hidden="true">📄</div>
+            <div class="upload-card-header">
+                <h2>Upload Your Resume</h2>
+                <p>Upload your latest resume to receive a complete analysis.</p>
+            </div>
+            <label class="file-dropzone" for="resume">
+                <span class="dropzone-icon">⬆</span>
+                <span class="dropzone-text">Drag &amp; Drop your PDF here or choose a file</span>
+                <span class="dropzone-format">Supported format: PDF</span>
+            </label>
+            <input id="resume" class="file-input" type="file" name="resume" accept=".pdf" aria-label="Upload PDF resume">
+            <label for="job-description" class="job-description-label">Optional job description</label>
+            <textarea id="job-description" class="job-description-input" name="job_description" rows="4" placeholder="Paste a job description to compare your resume against..."></textarea>
+            <button class="upload-button" type="submit">Analyze Resume</button>
+            <div id="error-message" class="error-message" role="alert"></div>
+        </form>
+
+        <div class="hero-side-panel">
+            <div class="hero-side-card hero-side-card-main">
+                <h3>What you’ll unlock</h3>
+                <p>Turn a plain resume into a data-rich candidate profile with actionable insights.</p>
+            </div>
+            <div class="hero-side-card">
+                <span class="hero-side-icon">⚡</span>
+                <div>
+                    <strong>Instant analysis</strong>
+                    <p>Get ATS readiness, role fit, and improvement guidance in seconds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section" aria-label="How it works">
+        <article class="step-card">
+            <div class="step-icon">①</div>
+            <h3>Upload Resume</h3>
+            <p>Drop in your latest PDF and let the platform prepare it.</p>
+        </article>
+        <article class="step-card">
+            <div class="step-icon">②</div>
+            <h3>Analyze Resume</h3>
+            <p>Extract structure, skills, and experience with precision.</p>
+        </article>
+        <article class="step-card">
+            <div class="step-icon">③</div>
+            <h3>Compare with Job Description</h3>
+            <p>Measure alignment with a target role and its requirements.</p>
+        </article>
+        <article class="step-card">
+            <div class="step-icon">④</div>
+            <h3>Get Personalized Insights</h3>
+            <p>Receive ATS feedback, missing skills, and recommendations.</p>
+        </article>
+    </section>
+
+    <section class="features-section" aria-label="Feature highlights">
+        <article class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>ATS Score</h3>
+            <p>Measure resume completeness and readiness.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">💼</div>
+            <h3>Job Match</h3>
+            <p>Compare your resume with job descriptions.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3>Skill Gap</h3>
+            <p>Discover missing skills and growth areas.</p>
+        </article>
+        <article class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Suggestions</h3>
+            <p>Receive actionable recommendations to improve.</p>
+        </article>
+    </section>
+</div>
+
+<div id="loading" class="loading-overlay" aria-live="polite" aria-hidden="true">
+    <div class="loading-panel">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <h2>Analyzing Your Resume...</h2>
+        <div class="loading-checklist">
+            <div class="loading-item is-active"><span>✓</span><p>Extracting Resume Text</p></div>
+            <div class="loading-item"><span>✓</span><p>Parsing Resume Sections</p></div>
+            <div class="loading-item"><span>✓</span><p>Calculating ATS Score</p></div>
+            <div class="loading-item"><span>✓</span><p>Matching Job Requirements</p></div>
+            <div class="loading-item"><span>✓</span><p>Identifying Skill Gaps</p></div>
+            <div class="loading-item"><span>✓</span><p>Generating Suggestions</p></div>
+        </div>
+        <p class="loading-footer">Preparing Your Dashboard...</p>
+    </div>
 </div>
 {% endblock %}

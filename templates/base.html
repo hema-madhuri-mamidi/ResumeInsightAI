@@ -6,11 +6,54 @@
     <title>{% block title %}Resume Insight AI{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body id="top">
     <main class="container">
         {% block content %}{% endblock %}
     </main>
 
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-main">
+                <div class="site-footer-brand">
+                    <div class="site-footer-logo" aria-hidden="true">RI</div>
+                    <div>
+                        <h3>ResumeInsightAI</h3>
+                        <p>Smart Resume Analysis, ATS Evaluation, Job Matching &amp; Skill Gap Insights</p>
+                    </div>
+                </div>
+
+                <div class="site-footer-details">
+                    <div class="site-footer-group">
+                        <span class="site-footer-label">Developed by</span>
+                        <span class="site-footer-value">Hema Madhuri Mamidi</span>
+                        <span class="site-footer-subvalue">B.Tech – Artificial Intelligence &amp; Data Science</span>
+                    </div>
+
+                    <!-- <div class="site-footer-group">
+                        <span class="site-footer-label">Built with</span>
+                        <div class="site-footer-stack" aria-label="Technology stack">
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div> -->
+
+                    <div class="site-footer-group">
+                        <span class="site-footer-label">Project</span>
+                        <span class="site-footer-value">Version v1.0</span>
+                        <span class="site-footer-subvalue">© 2026 ResumeInsightAI · All Rights Reserved.</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#top" class="back-to-top" aria-label="Back to top">↑ Top</a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

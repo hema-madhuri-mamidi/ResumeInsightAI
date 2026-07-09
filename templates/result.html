@@ -4,13 +4,22 @@
 
 {% block content %}
 <div class="results-page">
-    <div class="results-header">
-        <div class="results-eyebrow">Resume Insights</div>
-        <h1>Resume Analysis</h1>
-        <p>Your parsed resume information is shown below.</p>
+    <div class="report-actions" aria-label="Report actions">
+        <button class="report-btn report-btn-primary" id="download-pdf-btn" type="button">📄 Download Analysis Report</button>
+        <button class="report-btn" id="print-report-btn" type="button">🖨️ Print Report</button>
     </div>
+    <div id="results-hero" class="results-hero" aria-live="polite"></div>
     <div class="results-shell">
-        <div id="results-container" class="results-grid" aria-live="polite"></div>
+        <aside class="results-nav-shell">
+            <button class="results-nav-toggle" id="results-nav-toggle" type="button" aria-expanded="false" aria-controls="results-nav">
+                <span>☰</span>
+                <span>Sections</span>
+            </button>
+            <nav class="results-nav" id="results-nav" aria-label="Results sections"></nav>
+        </aside>
+        <div class="results-content">
+            <div id="results-container" class="results-content-stack" aria-live="polite"></div>
+        </div>
     </div>
 </div>
 {% endblock %}

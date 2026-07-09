@@ -61,7 +61,7 @@ def parse_resume() -> Any:
 
     job_description = request.form.get("job_description", "").strip()
     ats_score = calculate_ats_score(data)
-    suggestions = generate_suggestions(data)
+    suggestions = generate_suggestions(data, ats_score)
     job_match = calculate_job_match(data, job_description)
     skill_gap = analyze_skill_gap(data, job_description)
     data["ats_score"] = ats_score
