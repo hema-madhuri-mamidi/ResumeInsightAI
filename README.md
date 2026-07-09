@@ -25,6 +25,9 @@ Current limitations:
 
 🔗 **Application:** https://resumeinsightai.onrender.com
 
+🔗 LinkedIn: https://www.linkedin.com/posts/hema-madhuri-mamidi_python-flask-fullstackdevelopment-ugcPost-7481005467637493760-RXI6/
+
+💻 GitHub: https://github.com/hema-madhuri-mamidi/ResumeInsightAI
 ---
 
 # 👩‍💻 Author
@@ -35,9 +38,9 @@ Current limitations:
 
 🏫 Vignan's Institute of Information Technology
 
-🔗 LinkedIn: https://www.linkedin.com/posts/hema-madhuri-mamidi_python-flask-fullstackdevelopment-ugcPost-7481005467637493760-RXI6/
+🔗 LinkedIn: https://www.linkedin.com/in/hema-madhuri-mamidi/
 
-💻 GitHub: https://github.com/hema-madhuri-mamidi/ResumeInsightAI
+💻 GitHub: https://github.com/hema-madhuri-mamidi
 
 ---
 
