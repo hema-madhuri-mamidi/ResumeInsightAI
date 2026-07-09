@@ -12,6 +12,7 @@ from .job_match import calculate_job_match
 from .parser import parse_resume as parse_resume_v2
 from .skill_gap import analyze_skill_gap
 from .suggestions import generate_suggestions
+from database import save_resume_analysis
 
 bp = Blueprint("main", __name__, url_prefix="/api")
 
@@ -68,6 +69,8 @@ def parse_resume() -> Any:
     data["suggestions"] = suggestions
     data["job_match"] = job_match
     data["skill_gap"] = skill_gap
+
+    save_resume_analysis(data)
 
     return jsonify({"success": True, "data": data})
 # text=extract_pdf_text(temp_path)
