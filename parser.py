@@ -473,19 +473,20 @@ def parse_resume(pdf_path):
 # pprint(extract_experience(text))
 
 
-for file in os.listdir("uploads"):
+if __name__ == "__main__":
+    for file in os.listdir("uploads"):
 
-    if file.endswith(".pdf"):
+        if file.endswith(".pdf"):
 
-        print("\n" + "=" * 80)
-        print(file)
-        print("=" * 80)
+            print("\n" + "=" * 80)
+            print(file)
+            print("=" * 80)
 
-        pdf_path = os.path.join("uploads", file)
+            pdf_path = os.path.join("uploads", file)
 
-        data = parse_resume(pdf_path)
+            data = parse_resume(pdf_path)
 
-        pprint(data)
+            pprint(data)
 
 
     

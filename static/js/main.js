@@ -746,6 +746,21 @@ document.addEventListener("DOMContentLoaded", () => {
         initAtsProgressBars();
         initDashboardAnimations();
     }
+
+    // Theme Toggle Functionality
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+            const isDarkMode = document.body.classList.contains("dark-mode");
+            if (isDarkMode) {
+                document.body.classList.remove("dark-mode");
+                localStorage.setItem("theme", "light");
+            } else {
+                document.body.classList.add("dark-mode");
+                localStorage.setItem("theme", "dark");
+            }
+        });
+    }
 });
 
 function renderResumeSectionAccordion(value, key, title) {

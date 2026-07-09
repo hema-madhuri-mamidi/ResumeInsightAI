@@ -7,6 +7,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body id="top">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="/" class="site-logo" aria-label="ResumeInsightAI Home">
+                <div class="site-logo-icon" aria-hidden="true">RI</div>
+                <span class="site-logo-text">ResumeInsightAI</span>
+            </a>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <span class="toggle-light">☀ Light</span>
+                    <span class="toggle-dark">🌙 Dark</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
     <main class="container">
         {% block content %}{% endblock %}
     </main>
