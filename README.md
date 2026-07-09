@@ -12,34 +12,36 @@
 
 Current limitations:
 - Experience extraction is conservative.
-- Complex resume layouts may not be fully supported. -->
-🚀 ResumeInsightAI
+- Complex resume layouts may not be fully supported.
+-->
 
-«A modern Resume Analysis platform that helps job seekers evaluate their resumes through ATS analysis, job matching, skill gap identification, and personalized improvement suggestions.»
+# 🚀 ResumeInsightAI
 
----
-
-🌐 Live Demo
-
-🔗 Application: https://resumeinsightai.onrender.com
-
-
+> A modern Resume Analysis platform that helps job seekers evaluate their resumes through ATS analysis, job matching, skill gap identification, and personalized improvement suggestions.
 
 ---
 
-👩‍💻 Author
+# 🌐 Live Demo
 
-Hema Madhuri Mamidi
+🔗 **Application:** https://resumeinsightai.onrender.com
+
+---
+
+# 👩‍💻 Author
+
+**Hema Madhuri Mamidi**
 
 🎓 B.Tech – Artificial Intelligence & Data Science
+
 🏫 Vignan's Institute of Information Technology
 
 🔗 LinkedIn: https://www.linkedin.com/posts/hema-madhuri-mamidi_python-flask-fullstackdevelopment-ugcPost-7481005467637493760-RXI6/
+
 💻 GitHub: https://github.com/hema-madhuri-mamidi/ResumeInsightAI
 
 ---
 
-✨ Features
+# ✨ Features
 
 - 📄 Upload PDF resumes
 - 🔍 Automatic Resume Parsing
@@ -56,9 +58,9 @@ Hema Madhuri Mamidi
 
 ---
 
-🛠 Tech Stack
+# 🛠 Tech Stack
 
-Backend
+## Backend
 
 - 🐍 Python
 - 🌶 Flask
@@ -66,27 +68,28 @@ Backend
 - 🐘 PostgreSQL (Production)
 - 🗃 SQLite (Development)
 
-Resume Parsing
+## Resume Parsing
 
 - 📄 PDFPlumber
 - 🔤 Regular Expressions (Regex)
 - 🧩 Rule-Based Modular Parsing
 
-Frontend
+## Frontend
 
 - HTML5
 - CSS3
 - JavaScript
 
-Deployment
+## Deployment
 
 - Render
 - GitHub
 
 ---
 
-📂 Project Structure
+# 📂 Project Structure
 
+```text
 ResumeInsightAI/
 │
 ├── app.py
@@ -241,9 +244,7 @@ Create a virtual environment:
 
 python -m venv resu_env
 
-Activate it:
-
-Windows
+Activate it (Windows):
 
 resu_env\Scripts\activate
 
